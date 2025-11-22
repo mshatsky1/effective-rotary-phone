@@ -4,6 +4,7 @@ import click
 
 from rotary_phone import __version__
 from rotary_phone.dialer import dial
+from rotary_phone.exceptions import InvalidNumberError
 
 
 @click.group()
@@ -17,10 +18,13 @@ def main():
 @click.argument("number")
 @click.option("--delay", default=0.1, help="Delay between digits (seconds)")
 def dial_cmd(number: str, delay: float):
-    """Dial a phone number."""
+    """Dial a phone number.
+    
+    NUMBER: Phone number to dial (supports various formats)
+    """
     try:
         dial(number, delay)
-    except ValueError as e:
+    except (ValueError, InvalidNumberError) as e:
         click.echo(f"Error: {e}", err=True)
         raise click.Abort()
 

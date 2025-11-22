@@ -10,7 +10,16 @@ logger = setup_logger()
 
 
 def dial(number: str, delay: float = 0.1) -> None:
-    """Simulate dialing a phone number."""
+    """Simulate dialing a phone number.
+    
+    Args:
+        number: Phone number to dial. Must be a valid number format.
+        delay: Delay in seconds between each digit (default: 0.1).
+    
+    Raises:
+        InvalidNumberError: If the phone number is invalid.
+        ValueError: If delay is negative.
+    """
     if not validate_number(number):
         logger.error(f"Invalid phone number: {number}")
         raise InvalidNumberError(f"Invalid phone number: {number}")

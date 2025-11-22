@@ -3,10 +3,11 @@
 import click
 
 from rotary_phone import __version__
-from rotary_phone.contacts import list_contacts
+from rotary_phone.contacts import add_contact, delete_contact, get_contact, list_contacts
 from rotary_phone.dialer import dial
 from rotary_phone.exceptions import InvalidNumberError
 from rotary_phone.history import get_history
+from rotary_phone.utils import validate_number
 
 
 @click.group()
@@ -56,4 +57,35 @@ def contacts():
     click.echo("Contacts:")
     for name, number in sorted(contacts_dict.items()):
         click.echo(f"  {name}: {number}")
+
+
+@main.command()
+@click.argument("name")
+@click.argument("number")
+def add(name: str, number: str):
+    """Add a contact.
+    
+    NAME: Contact name
+    NUMBER: Phone number
+    """
+    if not validate_number(number):
+        click.echo(f"Error: Invalid phone number: {number}", err=True)
+        raise click.Abort()
+    
+    add_contact(name, number)
+    click.echo(f"Added contact: {name} -> {number}")
+
+
+@main.command()
+@click.argument("name")
+def delete(name: str):
+    """Delete a contact.
+    
+    NAME: Contact name to delete
+    """
+    if delete_contact(name):
+        click.echo(f"Deleted contact: {name}")
+    else:
+        click.echo(f"Contact not found: {name}", err=True)
+        raise click.Abort()
 

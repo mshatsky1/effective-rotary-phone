@@ -3,6 +3,7 @@
 import time
 
 from rotary_phone.exceptions import InvalidNumberError
+from rotary_phone.history import add_to_history
 from rotary_phone.logger import setup_logger
 from rotary_phone.utils import validate_number, format_number
 
@@ -29,12 +30,16 @@ def dial(number: str, delay: float = 0.1) -> None:
         raise ValueError("Delay must be non-negative")
     
     cleaned = number.replace("-", "").replace(" ", "").replace("(", "").replace(")", "")
-    logger.info(f"Dialing {format_number(cleaned)}...")
-    print(f"Dialing {format_number(cleaned)}...")
+    formatted = format_number(cleaned)
+    logger.info(f"Dialing {formatted}...")
+    print(f"Dialing {formatted}...")
     
     for digit in cleaned:
         print(f"  {digit}", end="", flush=True)
         time.sleep(delay)
+    
+    # Add to history
+    add_to_history(cleaned, formatted)
     
     logger.info("Connection established")
     print("\nConnection established!")

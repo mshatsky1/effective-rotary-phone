@@ -20,11 +20,21 @@ def main():
 @main.command()
 @click.argument("number")
 @click.option("--delay", default=0.1, help="Delay between digits (seconds)")
-def dial_cmd(number: str, delay: float):
-    """Dial a phone number.
+@click.option("--contact", is_flag=True, help="Treat NUMBER as a contact name")
+def dial_cmd(number: str, delay: float, contact: bool):
+    """Dial a phone number or contact.
     
-    NUMBER: Phone number to dial (supports various formats)
+    NUMBER: Phone number to dial (supports various formats) or contact name if --contact is used
     """
+    # Try to resolve contact name if flag is set
+    if contact:
+        contact_number = get_contact(number)
+        if not contact_number:
+            click.echo(f"Error: Contact not found: {number}", err=True)
+            raise click.Abort()
+        number = contact_number
+        click.echo(f"Dialing contact: {number} ({number})")
+    
     try:
         dial(number, delay)
     except (ValueError, InvalidNumberError) as e:

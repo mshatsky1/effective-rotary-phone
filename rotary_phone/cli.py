@@ -68,14 +68,31 @@ def history(limit: int):
 
 
 @main.command()
-def contacts():
-    """List all contacts."""
+@click.option("--search", help="Search contacts by name")
+def contacts(search: Optional[str]):
+    """List all contacts.
+    
+    Use --search to filter contacts by name.
+    """
     contacts_dict = list_contacts()
+    
+    # Filter by search term if provided
+    if search:
+        search_lower = search.lower()
+        contacts_dict = {
+            name: number for name, number in contacts_dict.items()
+            if search_lower in name.lower()
+        }
+    
     if not contacts_dict:
-        click.echo("No contacts saved.")
+        if search:
+            click.echo(f"No contacts found matching '{search}'.")
+        else:
+            click.echo("No contacts saved.")
         return
     
-    click.echo(f"Contacts ({len(contacts_dict)}):")
+    search_text = f" matching '{search}'" if search else ""
+    click.echo(f"Contacts{search_text} ({len(contacts_dict)}):")
     click.echo("-" * 50)
     for name, number in sorted(contacts_dict.items()):
         formatted = format_number(number)

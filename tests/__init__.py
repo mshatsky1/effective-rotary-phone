@@ -1,0 +1,2 @@
+"""Tests for rotary phone."""
+

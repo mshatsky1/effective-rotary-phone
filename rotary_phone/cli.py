@@ -7,6 +7,7 @@ from rotary_phone.contacts import add_contact, delete_contact, get_contact, list
 from rotary_phone.dialer import dial
 from rotary_phone.exceptions import InvalidNumberError
 from rotary_phone.history import clear_history, get_history
+from rotary_phone.stats import get_dial_stats, get_top_dialed
 from rotary_phone.utils import format_number, validate_number
 
 
@@ -110,4 +111,28 @@ def clear():
     """Clear call history."""
     clear_history()
     click.echo("Call history cleared.")
+
+
+@main.command()
+@click.option("--top", default=5, help="Number of top dialed numbers to show")
+def stats(top: int):
+    """Show dialing statistics."""
+    stats_data = get_dial_stats()
+    
+    click.echo("Statistics:")
+    click.echo("-" * 50)
+    click.echo(f"Total calls: {stats_data['total_calls']}")
+    click.echo(f"Unique numbers: {stats_data['unique_numbers']}")
+    click.echo(f"Saved contacts: {stats_data['total_contacts']}")
+    
+    if stats_data['most_dialed']:
+        formatted = format_number(stats_data['most_dialed'])
+        click.echo(f"\nMost dialed: {formatted} ({stats_data['most_dialed_count']} times)")
+        
+        if top > 0:
+            click.echo(f"\nTop {top} most dialed numbers:")
+            top_dialed = get_top_dialed(top)
+            for i, (number, count) in enumerate(top_dialed, 1):
+                formatted_num = format_number(number)
+                click.echo(f"  {i}. {formatted_num} - {count} time{'s' if count > 1 else ''}")
 

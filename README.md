@@ -50,14 +50,55 @@ python main.py history --limit 20
 python main.py clear
 ```
 
+### Statistics
+
+```bash
+# View statistics
+python main.py stats
+python main.py stats --top 10
+```
+
+### Export/Import
+
+```bash
+# Export data to JSON file
+python main.py export backup.json
+python main.py export backup_no_history.json --no-history
+
+# Import data from JSON file
+python main.py import backup.json
+python main.py import backup.json --replace
+```
+
+### Configuration
+
+```bash
+# Show configuration
+python main.py config show
+
+# Set configuration values
+python main.py config set default_delay 0.2
+python main.py config set history_limit 200
+```
+
+### Search
+
+```bash
+# Search contacts by name
+python main.py contacts --search "John"
+```
+
 ## Features
 
 - Phone number validation
 - Multiple number formats supported
-- Configurable dialing delay
-- Contact management (add, delete, list)
+- Configurable dialing delay (with config file support)
+- Contact management (add, delete, list, search)
 - Call history tracking
 - Dial by contact name
+- Statistics and analytics
+- Export/import functionality
+- Configuration file management
 - Logging support
 - Comprehensive error handling
 

@@ -1,11 +1,11 @@
 """CLI interface for rotary phone."""
 
 import click
-
-import click
 from pathlib import Path
+from typing import Optional
 
 from rotary_phone import __version__
+from rotary_phone.config import get_config_value, load_config, set_config_value
 from rotary_phone.contacts import add_contact, delete_contact, get_contact, list_contacts
 from rotary_phone.dialer import dial
 from rotary_phone.exceptions import InvalidNumberError
@@ -24,13 +24,17 @@ def main():
 
 @main.command()
 @click.argument("number")
-@click.option("--delay", default=0.1, help="Delay between digits (seconds)")
+@click.option("--delay", default=None, type=float, help="Delay between digits (seconds)")
 @click.option("--contact", is_flag=True, help="Treat NUMBER as a contact name")
-def dial_cmd(number: str, delay: float, contact: bool):
+def dial_cmd(number: str, delay: Optional[float], contact: bool):
     """Dial a phone number or contact.
     
     NUMBER: Phone number to dial (supports various formats) or contact name if --contact is used
     """
+    # Use default delay from config if not specified
+    if delay is None:
+        delay = get_config_value('default_delay', 0.1)
+    
     # Try to resolve contact name if flag is set
     if contact:
         contact_number = get_contact(number)
@@ -170,4 +174,44 @@ def import_cmd(input_file: str, replace: bool):
     if stats['contacts_skipped'] > 0:
         click.echo(f"  Contacts skipped: {stats['contacts_skipped']}")
     click.echo(f"  History entries added: {stats['history_entries_added']}")
+
+
+@main.group()
+def config():
+    """Manage configuration settings."""
+    pass
+
+
+@config.command()
+def show():
+    """Show current configuration."""
+    config_data = load_config()
+    click.echo("Configuration:")
+    click.echo("-" * 50)
+    for key, value in sorted(config_data.items()):
+        click.echo(f"  {key}: {value}")
+
+
+@config.command()
+@click.argument("key")
+@click.argument("value")
+def set_cmd(key: str, value: str):
+    """Set a configuration value.
+    
+    KEY: Configuration key
+    VALUE: Configuration value
+    """
+    # Try to convert value to appropriate type
+    try:
+        if value.lower() in ('true', 'false'):
+            value = value.lower() == 'true'
+        elif '.' in value:
+            value = float(value)
+        else:
+            value = int(value)
+    except ValueError:
+        pass  # Keep as string
+    
+    set_config_value(key, value)
+    click.echo(f"Set {key} = {value}")
 

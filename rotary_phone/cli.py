@@ -6,8 +6,8 @@ from rotary_phone import __version__
 from rotary_phone.contacts import add_contact, delete_contact, get_contact, list_contacts
 from rotary_phone.dialer import dial
 from rotary_phone.exceptions import InvalidNumberError
-from rotary_phone.history import get_history
-from rotary_phone.utils import validate_number
+from rotary_phone.history import clear_history, get_history
+from rotary_phone.utils import format_number, validate_number
 
 
 @click.group()
@@ -51,9 +51,11 @@ def history(limit: int):
         click.echo("No call history.")
         return
     
-    click.echo("Recent calls:")
+    click.echo(f"Recent calls (showing last {min(limit, len(history_list))}):")
+    click.echo("-" * 50)
     for entry in reversed(history_list):
-        click.echo(f"  {entry['formatted']} - {entry['timestamp']}")
+        timestamp = entry['timestamp'][:19].replace('T', ' ')
+        click.echo(f"  {entry['formatted']:<20} {timestamp}")
 
 
 @main.command()
@@ -64,9 +66,11 @@ def contacts():
         click.echo("No contacts saved.")
         return
     
-    click.echo("Contacts:")
+    click.echo(f"Contacts ({len(contacts_dict)}):")
+    click.echo("-" * 50)
     for name, number in sorted(contacts_dict.items()):
-        click.echo(f"  {name}: {number}")
+        formatted = format_number(number)
+        click.echo(f"  {name:<20} {formatted}")
 
 
 @main.command()
@@ -98,4 +102,12 @@ def delete(name: str):
     else:
         click.echo(f"Contact not found: {name}", err=True)
         raise click.Abort()
+
+
+@main.command()
+@click.confirmation_option(prompt="Are you sure you want to clear call history?")
+def clear():
+    """Clear call history."""
+    clear_history()
+    click.echo("Call history cleared.")
 

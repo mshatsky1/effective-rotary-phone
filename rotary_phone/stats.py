@@ -64,3 +64,5 @@ def get_top_dialed(limit: int = 5) -> List[tuple]:
     number_counts = Counter(entry['number'] for entry in history)
     return number_counts.most_common(limit)
 
+
+

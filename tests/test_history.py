@@ -63,3 +63,5 @@ def test_history_max_entries(temp_config):
     history = load_history()
     assert len(history) == 100
 
+
+

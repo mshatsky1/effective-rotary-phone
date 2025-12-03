@@ -60,3 +60,5 @@ def test_get_nonexistent_contact(temp_config):
     """Test getting a contact that doesn't exist."""
     assert get_contact("Nonexistent") is None
 
+
+

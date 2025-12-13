@@ -38,9 +38,11 @@ def dial(number: str, delay: float = 0.1) -> None:
         print(f"  {digit}", end="", flush=True)
         time.sleep(delay)
     
+    print()  # New line after dialing
+    
     # Add to history
     add_to_history(cleaned, formatted)
     
     logger.info("Connection established")
-    print("\nConnection established!")
+    print("Connection established!")
 

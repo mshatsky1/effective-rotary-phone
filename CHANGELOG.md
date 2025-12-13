@@ -33,6 +33,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configuration management commands
 - Export/import with merge/replace options
 
+## [0.2.0] - 2024-01-XX
+
+### Added
+- Version 0.2.0 release
+- normalize_number utility function
+- update_contact function for modifying existing contacts
+- get_average_calls_per_day statistics function
+- Export version metadata in exported data
+- Enhanced number validation with minimum length check
+- Configurable history limit support
+- Improved error handling and exception types
+- Better logging with formatted connection messages
+
+### Changed
+- Bumped version to 0.2.0
+- Improved contact management with return values
+- Enhanced dialer to use normalize_number utility
+- Updated CLI to handle existing contacts better
+- Improved documentation and docstrings
+
 ## [Unreleased]
 
 ### Planned

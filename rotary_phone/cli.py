@@ -113,8 +113,11 @@ def add(name: str, number: str):
         click.echo(f"Error: Invalid phone number: {number}", err=True)
         raise click.Abort()
     
-    add_contact(name, number)
-    click.echo(f"Added contact: {name} -> {number}")
+    if add_contact(name, number):
+        click.echo(f"Added contact: {name} -> {number}")
+    else:
+        click.echo(f"Contact '{name}' already exists. Use delete command to remove it first.", err=True)
+        raise click.Abort()
 
 
 @main.command()

@@ -39,3 +39,15 @@ def format_number(number: str) -> str:
         return f"{cleaned[:3]}-{cleaned[3:]}"
     return cleaned
 
+
+def normalize_number(number: str) -> str:
+    """Normalize a phone number by removing all formatting.
+    
+    Args:
+        number: Phone number string to normalize.
+    
+    Returns:
+        Cleaned phone number with only digits.
+    """
+    return number.replace("-", "").replace(" ", "").replace("(", "").replace(")", "")
+

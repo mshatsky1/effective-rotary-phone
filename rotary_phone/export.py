@@ -14,9 +14,13 @@ def export_data(output_file: Path, include_history: bool = True) -> None:
     Args:
         output_file: Path to the output JSON file.
         include_history: Whether to include call history in export.
+    
+    Raises:
+        IOError: If the file cannot be written.
     """
     data = {
         'contacts': load_contacts(),
+        'export_version': '1.0',
     }
     
     if include_history:

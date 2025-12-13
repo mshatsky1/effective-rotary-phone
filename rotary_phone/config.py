@@ -101,5 +101,6 @@ def _get_default_config() -> Dict[str, Any]:
         'default_delay': 0.1,
         'history_limit': 100,
         'auto_save_history': True,
+        'enable_logging': True,
     }
 

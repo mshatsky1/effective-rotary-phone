@@ -90,17 +90,18 @@ python main.py contacts --search "John"
 
 ## Features
 
-- Phone number validation
-- Multiple number formats supported
+- Phone number validation with length checking
+- Multiple number formats supported (7 and 10 digit)
 - Configurable dialing delay (with config file support)
-- Contact management (add, delete, list, search)
-- Call history tracking
+- Contact management (add, delete, list, search, update)
+- Call history tracking with configurable limits
 - Dial by contact name
-- Statistics and analytics
-- Export/import functionality
+- Statistics and analytics (including average calls per day)
+- Export/import functionality with version metadata
 - Configuration file management
 - Logging support
 - Comprehensive error handling
+- Normalized phone number processing
 
 ## Testing
 

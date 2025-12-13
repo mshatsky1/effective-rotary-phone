@@ -55,7 +55,7 @@ def get_top_dialed(limit: int = 5) -> List[tuple]:
         limit: Maximum number of results to return.
     
     Returns:
-        List of tuples (number, count) sorted by frequency.
+        List of tuples (number, count) sorted by frequency (descending).
     """
     history = load_history()
     if not history:
@@ -63,6 +63,30 @@ def get_top_dialed(limit: int = 5) -> List[tuple]:
     
     number_counts = Counter(entry['number'] for entry in history)
     return number_counts.most_common(limit)
+
+
+def get_average_calls_per_day() -> float:
+    """Calculate average number of calls per day.
+    
+    Returns:
+        Average calls per day, or 0.0 if no history exists.
+    """
+    history = load_history()
+    if not history:
+        return 0.0
+    
+    from datetime import datetime, timedelta
+    
+    if len(history) < 2:
+        return float(len(history))
+    
+    # Get first and last timestamps
+    timestamps = [datetime.fromisoformat(entry['timestamp']) for entry in history]
+    first_date = min(timestamps)
+    last_date = max(timestamps)
+    
+    days = (last_date - first_date).days + 1
+    return len(history) / days if days > 0 else float(len(history))
 
 
 

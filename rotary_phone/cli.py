@@ -135,6 +135,27 @@ def delete(name: str):
 
 
 @main.command()
+@click.argument("name")
+@click.argument("number")
+def update(name: str, number: str):
+    """Update an existing contact's phone number.
+    
+    NAME: Contact name to update
+    NUMBER: New phone number
+    """
+    from rotary_phone.contacts import update_contact
+    if not validate_number(number):
+        click.echo(f"Error: Invalid phone number: {number}", err=True)
+        raise click.Abort()
+    
+    if update_contact(name, number):
+        click.echo(f"Updated contact: {name} -> {number}")
+    else:
+        click.echo(f"Contact not found: {name}", err=True)
+        raise click.Abort()
+
+
+@main.command()
 @click.confirmation_option(prompt="Are you sure you want to clear call history?")
 def clear():
     """Clear call history."""

@@ -1,5 +1,8 @@
 """Utility functions for rotary phone."""
 
+import re
+from typing import Optional
+
 
 def validate_number(number: str) -> bool:
     """Validate a phone number format.
@@ -12,9 +15,10 @@ def validate_number(number: str) -> bool:
         True if the number contains only digits (after removing formatting),
         False otherwise.
     """
-    if not number:
+    if not number or not isinstance(number, str):
         return False
-    return number.replace("-", "").replace(" ", "").replace("(", "").replace(")", "").isdigit()
+    cleaned = number.replace("-", "").replace(" ", "").replace("(", "").replace(")", "")
+    return cleaned.isdigit() and len(cleaned) >= 7
 
 
 def format_number(number: str) -> str:

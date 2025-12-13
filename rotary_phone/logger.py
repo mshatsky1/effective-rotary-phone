@@ -5,7 +5,15 @@ import sys
 
 
 def setup_logger(name: str = "rotary_phone", level: int = logging.INFO) -> logging.Logger:
-    """Set up and configure the logger."""
+    """Set up and configure the logger.
+    
+    Args:
+        name: Logger name.
+        level: Logging level.
+    
+    Returns:
+        Configured logger instance.
+    """
     logger = logging.getLogger(name)
     logger.setLevel(level)
     

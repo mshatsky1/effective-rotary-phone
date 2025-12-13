@@ -41,8 +41,9 @@ def dial_cmd(number: str, delay: Optional[float], contact: bool):
         if not contact_number:
             click.echo(f"Error: Contact not found: {number}", err=True)
             raise click.Abort()
+        formatted_contact = format_number(contact_number)
         number = contact_number
-        click.echo(f"Dialing contact: {number} ({number})")
+        click.echo(f"Dialing contact: {number} ({formatted_contact})")
     
     try:
         dial(number, delay)

@@ -56,8 +56,10 @@ def add_to_history(number: str, formatted: str) -> None:
         'timestamp': datetime.now().isoformat()
     }
     history.append(entry)
-    # Keep only last 100 entries
-    history = history[-100:]
+    # Keep only last N entries based on config
+    from rotary_phone.config import get_config_value
+    history_limit = get_config_value('history_limit', 100)
+    history = history[-history_limit:]
     save_history(history)
 
 

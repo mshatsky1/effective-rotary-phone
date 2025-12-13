@@ -59,6 +59,9 @@ def save_config(config: Dict[str, Any]) -> None:
     
     Args:
         config: Dictionary with configuration settings.
+    
+    Raises:
+        IOError: If the config file cannot be written.
     """
     config_file = get_config_file()
     with open(config_file, 'w') as f:

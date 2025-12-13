@@ -1,6 +1,5 @@
 """Utility functions for rotary phone."""
 
-import re
 from typing import Optional
 
 

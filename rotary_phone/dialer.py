@@ -29,7 +29,8 @@ def dial(number: str, delay: float = 0.1) -> None:
         logger.error("Delay must be non-negative")
         raise ValueError("Delay must be non-negative")
     
-    cleaned = number.replace("-", "").replace(" ", "").replace("(", "").replace(")", "")
+    from rotary_phone.utils import normalize_number
+    cleaned = normalize_number(number)
     formatted = format_number(cleaned)
     logger.info(f"Dialing {formatted}...")
     print(f"Dialing {formatted}...")

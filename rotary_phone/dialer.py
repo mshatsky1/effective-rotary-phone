@@ -44,6 +44,6 @@ def dial(number: str, delay: float = 0.1) -> None:
     # Add to history
     add_to_history(cleaned, formatted)
     
-    logger.info("Connection established")
+    logger.info(f"Connection established to {formatted}")
     print("Connection established!")
 

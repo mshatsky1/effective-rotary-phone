@@ -41,16 +41,22 @@ def save_contacts(contacts: Dict[str, str]) -> None:
         json.dump(contacts, f, indent=2)
 
 
-def add_contact(name: str, number: str) -> None:
+def add_contact(name: str, number: str) -> bool:
     """Add a contact.
     
     Args:
         name: Contact name.
         number: Phone number.
+    
+    Returns:
+        True if contact was added, False if contact already exists.
     """
     contacts = load_contacts()
+    if name in contacts:
+        return False
     contacts[name] = number
     save_contacts(contacts)
+    return True
 
 
 def get_contact(name: str) -> Optional[str]:

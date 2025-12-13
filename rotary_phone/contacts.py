@@ -98,6 +98,24 @@ def delete_contact(name: str) -> bool:
     return False
 
 
+def update_contact(name: str, number: str) -> bool:
+    """Update an existing contact's number.
+    
+    Args:
+        name: Contact name.
+        number: New phone number.
+    
+    Returns:
+        True if contact was updated, False if contact not found.
+    """
+    contacts = load_contacts()
+    if name not in contacts:
+        return False
+    contacts[name] = number
+    save_contacts(contacts)
+    return True
+
+
 
 
 

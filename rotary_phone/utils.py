@@ -25,10 +25,13 @@ def format_number(number: str) -> str:
     
     Returns:
         Formatted phone number in (XXX) XXX-XXXX format if 10 digits,
-        otherwise returns the cleaned number without formatting characters.
+        XXX-XXXX format if 7 digits, otherwise returns the cleaned number
+        without formatting characters.
     """
     cleaned = number.replace("-", "").replace(" ", "").replace("(", "").replace(")", "")
     if len(cleaned) == 10:
         return f"({cleaned[:3]}) {cleaned[3:6]}-{cleaned[6:]}"
+    elif len(cleaned) == 7:
+        return f"{cleaned[:3]}-{cleaned[3:]}"
     return cleaned
 

@@ -16,6 +16,16 @@ class DialError(RotaryPhoneError):
     pass
 
 
+class ContactNotFoundError(RotaryPhoneError):
+    """Raised when a contact is not found."""
+    pass
+
+
+class ContactExistsError(RotaryPhoneError):
+    """Raised when trying to add a contact that already exists."""
+    pass
+
+
 
 
 

@@ -7,8 +7,8 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="rotary-phone",
-    version="0.1.0",
-    author="Your Name",
+    version="0.2.0",
+    author="Rotary Phone Team",
     description="A simple CLI tool for rotary phone number dialing simulation",
     long_description=long_description,
     long_description_content_type="text/markdown",

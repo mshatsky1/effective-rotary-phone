@@ -1,4 +1,6 @@
 """Rotary Phone CLI - A simple dialing simulation tool."""
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
+__author__ = "Rotary Phone Team"
+__license__ = "MIT"
 

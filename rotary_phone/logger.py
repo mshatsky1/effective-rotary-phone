@@ -21,8 +21,10 @@ def setup_logger(name: str = "rotary_phone", level: int = logging.INFO) -> loggi
         handler = logging.StreamHandler(sys.stdout)
         handler.setLevel(level)
         
+        # Use more detailed format with milliseconds
         formatter = logging.Formatter(
-            '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+            '%(asctime)s.%(msecs)03d - %(name)s - %(levelname)s - %(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S'
         )
         handler.setFormatter(formatter)
         

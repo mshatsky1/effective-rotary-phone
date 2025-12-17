@@ -11,13 +11,13 @@ def validate_number(number: str) -> bool:
                 characters like '-', ' ', '(', ')'.
     
     Returns:
-        True if the number contains only digits (after removing formatting),
-        False otherwise.
+        True if the number contains only digits (after removing formatting)
+        and has valid length, False otherwise.
     """
     if not number or not isinstance(number, str):
         return False
-    cleaned = number.replace("-", "").replace(" ", "").replace("(", "").replace(")", "")
-    return cleaned.isdigit() and len(cleaned) >= 7
+    cleaned = normalize_number(number)
+    return cleaned.isdigit() and is_valid_length(cleaned)
 
 
 def format_number(number: str) -> str:

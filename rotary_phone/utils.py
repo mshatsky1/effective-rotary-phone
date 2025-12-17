@@ -50,3 +50,16 @@ def normalize_number(number: str) -> str:
     """
     return number.replace("-", "").replace(" ", "").replace("(", "").replace(")", "")
 
+
+def is_valid_length(number: str) -> bool:
+    """Check if a phone number has a valid length.
+    
+    Args:
+        number: Phone number string to check.
+    
+    Returns:
+        True if the number length is between 7 and 15 digits, False otherwise.
+    """
+    cleaned = normalize_number(number)
+    return 7 <= len(cleaned) <= 15
+

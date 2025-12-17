@@ -11,7 +11,7 @@ from rotary_phone.dialer import dial
 from rotary_phone.exceptions import InvalidNumberError
 from rotary_phone.export import export_data, import_data
 from rotary_phone.history import clear_history, get_history
-from rotary_phone.stats import get_dial_stats, get_top_dialed
+from rotary_phone.stats import get_average_calls_per_day, get_dial_stats, get_top_dialed
 from rotary_phone.utils import format_number, validate_number
 
 
@@ -185,6 +185,11 @@ def stats(top: int):
             for i, (number, count) in enumerate(top_dialed, 1):
                 formatted_num = format_number(number)
                 click.echo(f"  {i}. {formatted_num} - {count} time{'s' if count > 1 else ''}")
+    
+    # Show average calls per day
+    avg_calls = get_average_calls_per_day()
+    if avg_calls > 0:
+        click.echo(f"\nAverage calls per day: {avg_calls:.2f}")
 
 
 @main.command()

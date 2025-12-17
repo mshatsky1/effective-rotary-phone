@@ -35,9 +35,12 @@ def dial(number: str, delay: float = 0.1) -> None:
     logger.info(f"Dialing {formatted}...")
     print(f"Dialing {formatted}...")
     
-    for digit in cleaned:
+    for i, digit in enumerate(cleaned):
         print(f"  {digit}", end="", flush=True)
         time.sleep(delay)
+        # Add visual feedback every 3 digits
+        if (i + 1) % 3 == 0 and i + 1 < len(cleaned):
+            print(".", end="", flush=True)
     
     print()  # New line after dialing
     

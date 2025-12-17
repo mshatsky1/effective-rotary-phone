@@ -36,6 +36,9 @@ def save_history(history: List[Dict[str, str]]) -> None:
     
     Args:
         history: List of call history entries.
+    
+    Raises:
+        IOError: If the history file cannot be written.
     """
     history_file = get_history_file()
     with open(history_file, 'w') as f:

@@ -18,16 +18,18 @@ def export_data(output_file: Path, include_history: bool = True) -> None:
     Raises:
         IOError: If the file cannot be written.
     """
+    from datetime import datetime
     data = {
         'contacts': load_contacts(),
         'export_version': '1.0',
+        'export_date': datetime.now().isoformat(),
     }
     
     if include_history:
         data['history'] = load_history()
     
     with open(output_file, 'w') as f:
-        json.dump(data, f, indent=2)
+        json.dump(data, f, indent=2, sort_keys=True)
 
 
 def import_data(input_file: Path, merge: bool = True) -> Dict[str, int]:

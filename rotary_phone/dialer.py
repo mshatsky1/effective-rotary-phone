@@ -29,6 +29,9 @@ def dial(number: str, delay: float = 0.1) -> None:
         logger.error("Delay must be non-negative")
         raise ValueError("Delay must be non-negative")
     
+    if delay > 10.0:
+        logger.warning(f"Delay value {delay} is very high, dialing may take a long time")
+    
     from rotary_phone.utils import normalize_number
     cleaned = normalize_number(number)
     formatted = format_number(cleaned)

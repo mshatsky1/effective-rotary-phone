@@ -14,7 +14,8 @@ def get_dial_stats() -> Dict[str, int]:
         Dictionary with statistics including:
         - total_calls: Total number of calls made
         - unique_numbers: Number of unique numbers dialed
-        - most_dialed: Most frequently dialed number
+        - most_dialed: Most frequently dialed number (or None)
+        - most_dialed_count: Count of most dialed number
         - total_contacts: Number of saved contacts
     """
     history = load_history()

@@ -52,8 +52,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced dialer to use normalize_number utility
 - Updated CLI to handle existing contacts better
 - Improved documentation and docstrings
+- Enhanced logging format with millisecond precision
+- Refactored validate_number to use utility functions
+- Improved history sorting by timestamp
+- Added visual feedback during dialing
 
 ## [Unreleased]
+
+### Added
+- get_calls_by_day function for daily statistics
+- is_valid_length utility function
+- Export date timestamps
+- Configurable min/max number length
+- Enhanced stats command with average calls per day
+- Sorted JSON output for contacts and exports
+- Improved error documentation
 
 ### Planned
 - Interactive mode

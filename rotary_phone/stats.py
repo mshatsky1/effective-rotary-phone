@@ -89,6 +89,32 @@ def get_average_calls_per_day() -> float:
     return len(history) / days if days > 0 else float(len(history))
 
 
+def get_calls_by_day() -> Dict[str, int]:
+    """Get call count grouped by day.
+    
+    Returns:
+        Dictionary mapping date strings (YYYY-MM-DD) to call counts.
+    """
+    history = load_history()
+    if not history:
+        return {}
+    
+    from collections import Counter
+    from datetime import datetime
+    
+    dates = []
+    for entry in history:
+        timestamp = entry.get('timestamp', '')
+        if timestamp:
+            try:
+                dt = datetime.fromisoformat(timestamp)
+                dates.append(dt.strftime('%Y-%m-%d'))
+            except (ValueError, AttributeError):
+                continue
+    
+    return dict(Counter(dates))
+
+
 
 
 

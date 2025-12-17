@@ -105,5 +105,7 @@ def _get_default_config() -> Dict[str, Any]:
         'history_limit': 100,
         'auto_save_history': True,
         'enable_logging': True,
+        'min_number_length': 7,
+        'max_number_length': 15,
     }
 

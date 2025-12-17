@@ -6,7 +6,7 @@ from typing import Optional
 
 from rotary_phone import __version__
 from rotary_phone.config import get_config_value, load_config, set_config_value
-from rotary_phone.contacts import add_contact, delete_contact, get_contact, list_contacts
+from rotary_phone.contacts import add_contact, delete_contact, get_contact, get_contact_count, list_contacts
 from rotary_phone.dialer import dial
 from rotary_phone.exceptions import InvalidNumberError
 from rotary_phone.export import export_data, import_data
@@ -61,10 +61,11 @@ def history(limit: int):
         click.echo("No call history.")
         return
     
+    from rotary_phone.utils import format_timestamp
     click.echo(f"Recent calls (showing last {min(limit, len(history_list))}):")
     click.echo("-" * 50)
     for entry in reversed(history_list):
-        timestamp = entry['timestamp'][:19].replace('T', ' ')
+        timestamp = format_timestamp(entry['timestamp'])
         click.echo(f"  {entry['formatted']:<20} {timestamp}")
 
 
@@ -173,7 +174,7 @@ def stats(top: int):
     click.echo("-" * 50)
     click.echo(f"Total calls: {stats_data['total_calls']}")
     click.echo(f"Unique numbers: {stats_data['unique_numbers']}")
-    click.echo(f"Saved contacts: {stats_data['total_contacts']}")
+    click.echo(f"Saved contacts: {get_contact_count()}")
     
     if stats_data['most_dialed']:
         formatted = format_number(stats_data['most_dialed'])

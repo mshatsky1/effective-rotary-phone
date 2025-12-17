@@ -35,10 +35,13 @@ def save_contacts(contacts: Dict[str, str]) -> None:
     
     Args:
         contacts: Dictionary mapping contact names to phone numbers.
+    
+    Raises:
+        IOError: If the contacts file cannot be written.
     """
     contacts_file = get_contacts_file()
     with open(contacts_file, 'w') as f:
-        json.dump(contacts, f, indent=2)
+        json.dump(contacts, f, indent=2, sort_keys=True)
 
 
 def add_contact(name: str, number: str) -> bool:

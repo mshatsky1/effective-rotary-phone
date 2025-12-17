@@ -2,7 +2,7 @@
 
 import time
 
-from rotary_phone.exceptions import InvalidNumberError
+from rotary_phone.exceptions import InvalidDelayError, InvalidNumberError
 from rotary_phone.history import add_to_history
 from rotary_phone.logger import setup_logger
 from rotary_phone.utils import validate_number, format_number
@@ -27,7 +27,7 @@ def dial(number: str, delay: float = 0.1) -> None:
     
     if delay < 0:
         logger.error("Delay must be non-negative")
-        raise ValueError("Delay must be non-negative")
+        raise InvalidDelayError("Delay must be non-negative")
     
     if delay > 10.0:
         logger.warning(f"Delay value {delay} is very high, dialing may take a long time")

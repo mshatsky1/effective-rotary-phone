@@ -26,6 +26,11 @@ class ContactExistsError(RotaryPhoneError):
     pass
 
 
+class InvalidDelayError(RotaryPhoneError):
+    """Raised when an invalid delay value is provided."""
+    pass
+
+
 
 
 

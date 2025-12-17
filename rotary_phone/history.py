@@ -70,10 +70,12 @@ def get_history(limit: int = 10) -> List[Dict[str, str]]:
         limit: Maximum number of entries to return.
     
     Returns:
-        List of recent call history entries.
+        List of recent call history entries, sorted by timestamp (newest first).
     """
     history = load_history()
-    return history[-limit:]
+    # Return most recent entries, sorted by timestamp
+    sorted_history = sorted(history, key=lambda x: x.get('timestamp', ''), reverse=True)
+    return sorted_history[:limit]
 
 
 def clear_history() -> None:

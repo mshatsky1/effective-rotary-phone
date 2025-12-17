@@ -63,3 +63,21 @@ def is_valid_length(number: str) -> bool:
     cleaned = normalize_number(number)
     return 7 <= len(cleaned) <= 15
 
+
+def format_timestamp(timestamp: str) -> str:
+    """Format an ISO timestamp for display.
+    
+    Args:
+        timestamp: ISO format timestamp string.
+    
+    Returns:
+        Formatted timestamp string (YYYY-MM-DD HH:MM:SS).
+    """
+    try:
+        from datetime import datetime
+        dt = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
+        return dt.strftime('%Y-%m-%d %H:%M:%S')
+    except (ValueError, AttributeError):
+        # Fallback to simple string manipulation
+        return timestamp[:19].replace('T', ' ')
+

@@ -119,6 +119,16 @@ def update_contact(name: str, number: str) -> bool:
     return True
 
 
+def get_contact_count() -> int:
+    """Get the total number of contacts.
+    
+    Returns:
+        Number of contacts in the contacts file.
+    """
+    contacts = load_contacts()
+    return len(contacts)
+
+
 
 
 

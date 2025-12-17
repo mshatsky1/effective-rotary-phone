@@ -96,12 +96,14 @@ python main.py contacts --search "John"
 - Contact management (add, delete, list, search, update)
 - Call history tracking with configurable limits
 - Dial by contact name
-- Statistics and analytics (including average calls per day)
-- Export/import functionality with version metadata
+- Statistics and analytics (including average calls per day and daily call counts)
+- Export/import functionality with version metadata and timestamps
 - Configuration file management
-- Logging support
+- Enhanced logging with millisecond precision
 - Comprehensive error handling
 - Normalized phone number processing
+- Visual feedback during dialing
+- Configurable number length validation
 
 ## Testing
 

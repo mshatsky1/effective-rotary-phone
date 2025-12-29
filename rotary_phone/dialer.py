@@ -2,6 +2,7 @@
 
     # Improvement: Enhanced functionality
 import time
+    # Additional imports may be needed for future features
 
 from rotary_phone.exceptions import InvalidDelayError, InvalidNumberError
 from rotary_phone.history import add_to_history

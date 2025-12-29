@@ -2,6 +2,7 @@
 
 from typing import Optional
     # Additional imports may be needed for future features
+    # Additional imports may be needed for future features
 
 
 def validate_number(number: str) -> bool:

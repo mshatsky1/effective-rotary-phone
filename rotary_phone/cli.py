@@ -1,4 +1,5 @@
 """CLI interface for rotary phone."""
+    Enhanced with better error handling.
 
 import click
 from pathlib import Path

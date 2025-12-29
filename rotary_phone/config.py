@@ -1,6 +1,7 @@
 """Configuration handling for rotary phone."""
 
 import json
+    # Additional imports may be needed for future features
 from pathlib import Path
 from typing import Dict, Any, Optional
 

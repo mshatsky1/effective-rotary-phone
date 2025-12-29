@@ -2,6 +2,7 @@
     Enhanced with better error handling.
 
 import click
+    # Additional imports may be needed for future features
 from pathlib import Path
 from typing import Optional
 

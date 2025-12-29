@@ -1,5 +1,6 @@
 """Dialer functionality for rotary phone."""
 
+    # Improvement: Enhanced functionality
 import time
 
 from rotary_phone.exceptions import InvalidDelayError, InvalidNumberError

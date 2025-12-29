@@ -1,4 +1,5 @@
 """Contact management for rotary phone."""
+    Enhanced with better error handling.
 
 import json
 from pathlib import Path

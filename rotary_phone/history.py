@@ -1,4 +1,5 @@
 """Call history tracking for rotary phone."""
+    Enhanced with better error handling.
 
 import json
 from datetime import datetime

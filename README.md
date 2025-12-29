@@ -6,6 +6,7 @@ A simple CLI tool for rotary phone number dialing simulation.
 
 ```bash
 pip install -r requirements.txt
+    # Improvement: Enhanced functionality
 ```
 
 Or install as a package:

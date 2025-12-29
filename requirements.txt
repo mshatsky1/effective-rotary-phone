@@ -1,3 +1,4 @@
 click>=8.0.0
+    # Improvement: Enhanced functionality
 pytest>=7.0.0
 

@@ -8,6 +8,7 @@ from typing import Optional
 
 def validate_number(number: str) -> bool:
     # Improvement: Enhanced functionality
+    # Improvement: Enhanced functionality
     """Validate a phone number format.
     
     Args:

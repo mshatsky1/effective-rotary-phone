@@ -67,6 +67,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced stats command with average calls per day
 - Sorted JSON output for contacts and exports
 - Improved error documentation
+- format_duration utility function for human-readable time
+- --quiet flag for dial command
+- --daily flag for stats command
+- --days option for history command
+- --force flag for add command
+- config unset command
+- get_calls_by_hour function for hourly statistics
+- extract_country_code utility function
+- get_contacts_by_number function for reverse lookup
+- Additional exception types (ConfigError, ExportError, ImportError)
+- Improved error handling in export/import functions
+- Config-based logging control
+- Auto-save history configuration option
+
+### Changed
+- format_number now supports international formatting
+- Number length validation uses config values
+- Improved error handling throughout codebase
 
 ### Planned
 - Interactive mode

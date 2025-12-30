@@ -80,15 +80,11 @@ def contacts(search: Optional[str]):
     
     Use --search to filter contacts by name.
     """
-    contacts_dict = list_contacts()
-    
-    # Filter by search term if provided
+    from rotary_phone.contacts import search_contacts
     if search:
-        search_lower = search.lower()
-        contacts_dict = {
-            name: number for name, number in contacts_dict.items()
-            if search_lower in name.lower()
-        }
+        contacts_dict = search_contacts(search)
+    else:
+        contacts_dict = list_contacts()
     
     if not contacts_dict:
         if search:

@@ -88,10 +88,17 @@ def set_config_value(key: str, value: Any) -> None:
     Args:
         key: Configuration key.
         value: Value to set.
+    
+    Raises:
+        ConfigError: If configuration cannot be saved.
     """
-    config = load_config()
-    config[key] = value
-    save_config(config)
+    from rotary_phone.exceptions import ConfigError
+    try:
+        config = load_config()
+        config[key] = value
+        save_config(config)
+    except (IOError, OSError) as e:
+        raise ConfigError(f"Failed to save configuration: {e}") from e
 
 
 def _get_default_config() -> Dict[str, Any]:

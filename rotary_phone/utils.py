@@ -85,8 +85,11 @@ def is_valid_length(number: str) -> bool:
     Returns:
         True if the number length is between 7 and 15 digits, False otherwise.
     """
+    from rotary_phone.config import get_config_value
     cleaned = normalize_number(number)
-    return 7 <= len(cleaned) <= 15
+    min_length = get_config_value('min_number_length', 7)
+    max_length = get_config_value('max_number_length', 15)
+    return min_length <= len(cleaned) <= max_length
 
 
 def format_timestamp(timestamp: str) -> str:

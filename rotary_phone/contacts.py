@@ -129,6 +129,23 @@ def get_contact_count() -> int:
     return len(contacts)
 
 
+def search_contacts(query: str) -> Dict[str, str]:
+    """Search contacts by name (case-insensitive).
+    
+    Args:
+        query: Search query string.
+    
+    Returns:
+        Dictionary of matching contacts.
+    """
+    contacts = load_contacts()
+    query_lower = query.lower()
+    return {
+        name: number for name, number in contacts.items()
+        if query_lower in name.lower()
+    }
+
+
 
 
 

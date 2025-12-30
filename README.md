@@ -88,6 +88,25 @@ python main.py config set history_limit 200
 python main.py contacts --search "John"
 ```
 
+### Advanced Features
+
+```bash
+# Dial in quiet mode (suppress output)
+python main.py dial 555-1234 --quiet
+
+# Show daily call statistics
+python main.py stats --daily
+
+# Show calls from last 7 days
+python main.py history --days 7
+
+# Add contact with force overwrite
+python main.py add "John Doe" "555-1234" --force
+
+# Reset configuration value
+python main.py config unset default_delay
+```
+
 ## Features
 
 - Phone number validation with length checking

@@ -170,7 +170,8 @@ def clear():
 
 @main.command()
 @click.option("--top", default=5, help="Number of top dialed numbers to show")
-def stats(top: int):
+@click.option("--daily", is_flag=True, help="Show daily call statistics")
+def stats(top: int, daily: bool):
     """Show dialing statistics."""
     stats_data = get_dial_stats()
     
@@ -195,6 +196,15 @@ def stats(top: int):
     avg_calls = get_average_calls_per_day()
     if avg_calls > 0:
         click.echo(f"\nAverage calls per day: {avg_calls:.2f}")
+    
+    # Show daily statistics if requested
+    if daily:
+        from rotary_phone.stats import get_calls_by_day
+        daily_stats = get_calls_by_day()
+        if daily_stats:
+            click.echo("\nDaily call statistics:")
+            for date, count in sorted(daily_stats.items(), reverse=True)[:10]:
+                click.echo(f"  {date}: {count} call{'s' if count > 1 else ''}")
 
 
 @main.command()

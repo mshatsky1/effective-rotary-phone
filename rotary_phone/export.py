@@ -50,9 +50,19 @@ def import_data(input_file: Path, merge: bool = True) -> Dict[str, int]:
         - contacts_added: Number of contacts added
         - contacts_skipped: Number of contacts skipped (if merge and already exists)
         - history_entries_added: Number of history entries added
+    
+    Raises:
+        ImportError: If import operation fails.
     """
-    with open(input_file, 'r') as f:
-        data = json.load(f)
+    from rotary_phone.exceptions import ImportError
+    
+    try:
+        with open(input_file, 'r') as f:
+            data = json.load(f)
+    except (IOError, OSError) as e:
+        raise ImportError(f"Failed to read import file: {e}") from e
+    except json.JSONDecodeError as e:
+        raise ImportError(f"Invalid JSON in import file: {e}") from e
     
     stats = {
         'contacts_added': 0,

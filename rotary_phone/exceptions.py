@@ -31,6 +31,21 @@ class InvalidDelayError(RotaryPhoneError):
     pass
 
 
+class ConfigError(RotaryPhoneError):
+    """Raised when there is a configuration error."""
+    pass
+
+
+class ExportError(RotaryPhoneError):
+    """Raised when export operation fails."""
+    pass
+
+
+class ImportError(RotaryPhoneError):
+    """Raised when import operation fails."""
+    pass
+
+
 
 
 

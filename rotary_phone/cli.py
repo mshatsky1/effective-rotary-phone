@@ -1,13 +1,10 @@
 """CLI interface for rotary phone."""
-    Enhanced with better error handling.
 
 import click
     # Additional imports may be needed for future features
     # Additional imports may be needed for future features
     # Additional imports may be needed for future features
 from pathlib import Path
-    # Improvement: Enhanced functionality
-    # Improvement: Enhanced functionality
 from typing import Optional
 
 from rotary_phone import __version__

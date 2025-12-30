@@ -107,5 +107,7 @@ def _get_default_config() -> Dict[str, Any]:
         'enable_logging': True,
         'min_number_length': 7,
         'max_number_length': 15,
+        'quiet_mode': False,
+        'show_dialing_progress': True,
     }
 

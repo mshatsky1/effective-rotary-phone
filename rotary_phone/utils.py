@@ -1,14 +1,9 @@
 """Utility functions for rotary phone."""
 
 from typing import Optional
-    # Additional imports may be needed for future features
-    # Additional imports may be needed for future features
-    # Improvement: Enhanced functionality
 
 
 def validate_number(number: str) -> bool:
-    # Improvement: Enhanced functionality
-    # Improvement: Enhanced functionality
     """Validate a phone number format.
     
     Args:

@@ -4,9 +4,6 @@ __pycache__/
 *$py.class
 *.so
 .Python
-env/
-venv/
-ENV/
 build/
 develop-eggs/
 dist/
@@ -23,6 +20,12 @@ wheels/
 .installed.cfg
 *.egg
 
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
 # IDE
 .vscode/
 .idea/
@@ -30,7 +33,12 @@ wheels/
 *.swo
 *~
 
-# OS
-.DS_Store
-Thumbs.db
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
 
+# Project specific
+.rotary_phone/
+*.log

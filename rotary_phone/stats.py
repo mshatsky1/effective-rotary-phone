@@ -116,6 +116,32 @@ def get_calls_by_day() -> Dict[str, int]:
     return dict(Counter(dates))
 
 
+def get_calls_by_hour() -> Dict[int, int]:
+    """Get call count grouped by hour of day.
+    
+    Returns:
+        Dictionary mapping hour (0-23) to call counts.
+    """
+    history = load_history()
+    if not history:
+        return {}
+    
+    from collections import Counter
+    from datetime import datetime
+    
+    hours = []
+    for entry in history:
+        timestamp = entry.get('timestamp', '')
+        if timestamp:
+            try:
+                dt = datetime.fromisoformat(timestamp)
+                hours.append(dt.hour)
+            except (ValueError, AttributeError):
+                continue
+    
+    return dict(Counter(hours))
+
+
 
 
 

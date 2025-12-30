@@ -32,6 +32,10 @@ def dial(number: str, delay: float = 0.1, quiet: bool = False) -> None:
     if delay > 10.0:
         logger.warning(f"Delay value {delay} is very high, dialing may take a long time")
     
+    # Warn if delay is too small (might be too fast to see)
+    if 0 < delay < 0.01:
+        logger.warning(f"Delay value {delay} is very small, dialing may be too fast to see")
+    
     from rotary_phone.utils import normalize_number
     cleaned = normalize_number(number)
     formatted = format_number(cleaned)

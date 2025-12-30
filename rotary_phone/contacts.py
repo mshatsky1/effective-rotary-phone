@@ -146,6 +146,27 @@ def search_contacts(query: str) -> Dict[str, str]:
     }
 
 
+def get_contacts_by_number(number: str) -> List[str]:
+    """Get all contact names that have the given phone number.
+    
+    Args:
+        number: Phone number to search for.
+    
+    Returns:
+        List of contact names with the given number.
+    """
+    from rotary_phone.utils import normalize_number
+    contacts = load_contacts()
+    normalized = normalize_number(number)
+    
+    matching = []
+    for name, contact_number in contacts.items():
+        if normalize_number(contact_number) == normalized:
+            matching.append(name)
+    
+    return matching
+
+
 
 
 

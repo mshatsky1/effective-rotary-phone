@@ -55,6 +55,27 @@ def normalize_number(number: str) -> str:
     return number.replace("-", "").replace(" ", "").replace("(", "").replace(")", "")
 
 
+def extract_country_code(number: str) -> tuple[str, str]:
+    """Extract country code from phone number if present.
+    
+    Args:
+        number: Phone number string.
+    
+    Returns:
+        Tuple of (country_code, number_without_code).
+        If no country code found, returns ("", normalized_number).
+    """
+    cleaned = normalize_number(number)
+    
+    # Check for common country codes
+    if cleaned.startswith("1") and len(cleaned) == 11:
+        return ("1", cleaned[1:])
+    elif cleaned.startswith("+1") and len(cleaned) == 12:
+        return ("1", cleaned[2:])
+    
+    return ("", cleaned)
+
+
 def is_valid_length(number: str) -> bool:
     """Check if a phone number has a valid length.
     

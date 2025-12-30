@@ -111,7 +111,8 @@ def contacts(search: Optional[str]):
 @main.command()
 @click.argument("name")
 @click.argument("number")
-def add(name: str, number: str):
+@click.option("--force", is_flag=True, help="Overwrite existing contact")
+def add(name: str, number: str, force: bool):
     """Add a contact.
     
     NAME: Contact name
@@ -121,11 +122,20 @@ def add(name: str, number: str):
         click.echo(f"Error: Invalid phone number: {number}", err=True)
         raise click.Abort()
     
-    if add_contact(name, number):
-        click.echo(f"Added contact: {name} -> {number}")
+    if force:
+        from rotary_phone.contacts import update_contact
+        if update_contact(name, number):
+            click.echo(f"Updated contact: {name} -> {number}")
+        else:
+            # Contact doesn't exist, add it
+            add_contact(name, number)
+            click.echo(f"Added contact: {name} -> {number}")
     else:
-        click.echo(f"Contact '{name}' already exists. Use delete command to remove it first.", err=True)
-        raise click.Abort()
+        if add_contact(name, number):
+            click.echo(f"Added contact: {name} -> {number}")
+        else:
+            click.echo(f"Contact '{name}' already exists. Use --force to overwrite or delete command to remove it first.", err=True)
+            raise click.Abort()
 
 
 @main.command()

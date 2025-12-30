@@ -86,6 +86,40 @@ def clear_history() -> None:
     save_history([])
 
 
+def get_history_count() -> int:
+    """Get the total number of history entries.
+    
+    Returns:
+        Number of entries in call history.
+    """
+    return len(load_history())
+
+
+def get_recent_calls(days: int = 7) -> List[Dict[str, str]]:
+    """Get recent calls within the specified number of days.
+    
+    Args:
+        days: Number of days to look back.
+    
+    Returns:
+        List of call history entries within the specified period.
+    """
+    from datetime import datetime, timedelta
+    history = load_history()
+    cutoff_date = datetime.now() - timedelta(days=days)
+    
+    recent = []
+    for entry in history:
+        try:
+            timestamp = datetime.fromisoformat(entry.get('timestamp', ''))
+            if timestamp >= cutoff_date:
+                recent.append(entry)
+        except (ValueError, AttributeError):
+            continue
+    
+    return sorted(recent, key=lambda x: x.get('timestamp', ''), reverse=True)
+
+
 
 
 

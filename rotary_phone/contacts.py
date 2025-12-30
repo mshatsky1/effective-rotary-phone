@@ -1,14 +1,6 @@
 """Contact management for rotary phone."""
-    # Improvement: Enhanced functionality
-    Enhanced with better error handling.
 
 import json
-    # Additional imports may be needed for future features
-    # Improvement: Enhanced functionality
-    # Additional imports may be needed for future features
-    # Additional imports may be needed for future features
-    # Additional imports may be needed for future features
-    # Improvement: Enhanced functionality
 from pathlib import Path
 from typing import Dict, Optional
 

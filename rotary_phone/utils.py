@@ -81,3 +81,30 @@ def format_timestamp(timestamp: str) -> str:
         # Fallback to simple string manipulation
         return timestamp[:19].replace('T', ' ')
 
+
+def format_duration(seconds: float) -> str:
+    """Format a duration in seconds to a human-readable string.
+    
+    Args:
+        seconds: Duration in seconds.
+    
+    Returns:
+        Formatted duration string (e.g., "2h 30m 15s" or "45s").
+    """
+    if seconds < 60:
+        return f"{int(seconds)}s"
+    elif seconds < 3600:
+        minutes = int(seconds // 60)
+        secs = int(seconds % 60)
+        return f"{minutes}m {secs}s" if secs > 0 else f"{minutes}m"
+    else:
+        hours = int(seconds // 3600)
+        minutes = int((seconds % 3600) // 60)
+        secs = int(seconds % 60)
+        parts = [f"{hours}h"]
+        if minutes > 0:
+            parts.append(f"{minutes}m")
+        if secs > 0:
+            parts.append(f"{secs}s")
+        return " ".join(parts)
+

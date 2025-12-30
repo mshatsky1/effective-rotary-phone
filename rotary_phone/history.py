@@ -52,6 +52,12 @@ def add_to_history(number: str, formatted: str) -> None:
         number: The dialed number.
         formatted: Formatted version of the number.
     """
+    from rotary_phone.config import get_config_value
+    
+    # Check if auto_save_history is enabled
+    if not get_config_value('auto_save_history', True):
+        return
+    
     history = load_history()
     entry = {
         'number': number,
@@ -60,7 +66,6 @@ def add_to_history(number: str, formatted: str) -> None:
     }
     history.append(entry)
     # Keep only last N entries based on config
-    from rotary_phone.config import get_config_value
     history_limit = get_config_value('history_limit', 100)
     history = history[-history_limit:]
     save_history(history)

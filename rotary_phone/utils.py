@@ -20,11 +20,12 @@ def validate_number(number: str) -> bool:
     return cleaned.isdigit() and is_valid_length(cleaned)
 
 
-def format_number(number: str) -> str:
+def format_number(number: str, international: bool = False) -> str:
     """Format a phone number for display.
     
     Args:
         number: Phone number string to format.
+        international: If True, format with international prefix (+1).
     
     Returns:
         Formatted phone number in (XXX) XXX-XXXX format if 10 digits,
@@ -33,7 +34,10 @@ def format_number(number: str) -> str:
     """
     cleaned = number.replace("-", "").replace(" ", "").replace("(", "").replace(")", "")
     if len(cleaned) == 10:
-        return f"({cleaned[:3]}) {cleaned[3:6]}-{cleaned[6:]}"
+        formatted = f"({cleaned[:3]}) {cleaned[3:6]}-{cleaned[6:]}"
+        if international:
+            return f"+1 {formatted}"
+        return formatted
     elif len(cleaned) == 7:
         return f"{cleaned[:3]}-{cleaned[3:]}"
     return cleaned

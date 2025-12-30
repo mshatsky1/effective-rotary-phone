@@ -280,3 +280,27 @@ def set_cmd(key: str, value: str):
     set_config_value(key, value)
     click.echo(f"Set {key} = {value}")
 
+
+@config.command()
+@click.argument("key")
+def unset(key: str):
+    """Remove a configuration value (reset to default).
+    
+    KEY: Configuration key to remove
+    """
+    from rotary_phone.config import load_config, save_config, _get_default_config
+    config = load_config()
+    defaults = _get_default_config()
+    
+    if key in defaults:
+        config[key] = defaults[key]
+        save_config(config)
+        click.echo(f"Reset {key} to default value: {defaults[key]}")
+    elif key in config:
+        del config[key]
+        save_config(config)
+        click.echo(f"Removed {key} from configuration")
+    else:
+        click.echo(f"Configuration key '{key}' not found", err=True)
+        raise click.Abort()
+

@@ -52,4 +52,9 @@ def dial(number: str, delay: float = 0.1) -> None:
     
     logger.info(f"Connection established to {formatted}")
     print("Connection established!")
+    
+    # Calculate and log dialing duration
+    from rotary_phone.utils import format_duration
+    duration = len(cleaned) * delay
+    logger.debug(f"Dialing took {format_duration(duration)}")
 

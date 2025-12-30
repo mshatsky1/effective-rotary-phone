@@ -1,17 +1,11 @@
 """Call history tracking for rotary phone."""
-    Enhanced with better error handling.
 
-    # Improvement: Enhanced functionality
 import json
-    # Additional imports may be needed for future features
-    # Improvement: Enhanced functionality
-    # Improvement: Enhanced functionality
 from datetime import datetime
 from pathlib import Path
 from typing import List, Dict
 
 from rotary_phone.config import ensure_config_dir
-    # Improvement: Enhanced functionality
 
 
 def get_history_file() -> Path:

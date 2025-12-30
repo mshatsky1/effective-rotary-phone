@@ -58,9 +58,16 @@ def dial_cmd(number: str, delay: Optional[float], contact: bool, quiet: bool):
 
 @main.command()
 @click.option("--limit", default=10, help="Number of recent calls to show")
-def history(limit: int):
+@click.option("--days", type=int, help="Show calls from the last N days")
+def history(limit: int, days: Optional[int]):
     """Show call history."""
-    history_list = get_history(limit)
+    from rotary_phone.history import get_recent_calls
+    if days:
+        history_list = get_recent_calls(days)
+        history_list = history_list[:limit]
+    else:
+        history_list = get_history(limit)
+    
     if not history_list:
         click.echo("No call history.")
         return

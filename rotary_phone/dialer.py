@@ -10,7 +10,7 @@ from rotary_phone.utils import validate_number, format_number
 logger = setup_logger()
 
 
-def dial(number: str, delay: float = 0.1) -> None:
+def dial(number: str, delay: float = 0.1, quiet: bool = False) -> None:
     """Simulate dialing a phone number.
     
     Args:
@@ -36,22 +36,26 @@ def dial(number: str, delay: float = 0.1) -> None:
     cleaned = normalize_number(number)
     formatted = format_number(cleaned)
     logger.info(f"Dialing {formatted}...")
-    print(f"Dialing {formatted}...")
+    if not quiet:
+        print(f"Dialing {formatted}...")
     
     for i, digit in enumerate(cleaned):
-        print(f"  {digit}", end="", flush=True)
+        if not quiet:
+            print(f"  {digit}", end="", flush=True)
         time.sleep(delay)
         # Add visual feedback every 3 digits
-        if (i + 1) % 3 == 0 and i + 1 < len(cleaned):
+        if not quiet and (i + 1) % 3 == 0 and i + 1 < len(cleaned):
             print(".", end="", flush=True)
     
-    print()  # New line after dialing
+    if not quiet:
+        print()  # New line after dialing
     
     # Add to history
     add_to_history(cleaned, formatted)
     
     logger.info(f"Connection established to {formatted}")
-    print("Connection established!")
+    if not quiet:
+        print("Connection established!")
     
     # Calculate and log dialing duration
     from rotary_phone.utils import format_duration

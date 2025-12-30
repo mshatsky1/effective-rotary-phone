@@ -29,7 +29,8 @@ def main():
 @click.argument("number")
 @click.option("--delay", default=None, type=float, help="Delay between digits (seconds)")
 @click.option("--contact", is_flag=True, help="Treat NUMBER as a contact name")
-def dial_cmd(number: str, delay: Optional[float], contact: bool):
+@click.option("--quiet", is_flag=True, help="Suppress output during dialing")
+def dial_cmd(number: str, delay: Optional[float], contact: bool, quiet: bool):
     """Dial a phone number or contact.
     
     NUMBER: Phone number to dial (supports various formats) or contact name if --contact is used
@@ -49,7 +50,7 @@ def dial_cmd(number: str, delay: Optional[float], contact: bool):
         click.echo(f"Dialing contact: {number} ({formatted_contact})")
     
     try:
-        dial(number, delay)
+        dial(number, delay, quiet=quiet)
     except (ValueError, InvalidNumberError) as e:
         click.echo(f"Error: {e}", err=True)
         raise click.Abort()

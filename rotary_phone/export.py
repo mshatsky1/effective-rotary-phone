@@ -17,19 +17,25 @@ def export_data(output_file: Path, include_history: bool = True) -> None:
     
     Raises:
         IOError: If the file cannot be written.
+        ExportError: If export operation fails.
     """
     from datetime import datetime
-    data = {
-        'contacts': load_contacts(),
-        'export_version': '1.0',
-        'export_date': datetime.now().isoformat(),
-    }
+    from rotary_phone.exceptions import ExportError
     
-    if include_history:
-        data['history'] = load_history()
-    
-    with open(output_file, 'w') as f:
-        json.dump(data, f, indent=2, sort_keys=True)
+    try:
+        data = {
+            'contacts': load_contacts(),
+            'export_version': '1.0',
+            'export_date': datetime.now().isoformat(),
+        }
+        
+        if include_history:
+            data['history'] = load_history()
+        
+        with open(output_file, 'w') as f:
+            json.dump(data, f, indent=2, sort_keys=True)
+    except (IOError, OSError) as e:
+        raise ExportError(f"Failed to export data: {e}") from e
 
 
 def import_data(input_file: Path, merge: bool = True) -> Dict[str, int]:

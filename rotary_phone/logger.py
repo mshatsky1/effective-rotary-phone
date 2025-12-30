@@ -14,7 +14,15 @@ def setup_logger(name: str = "rotary_phone", level: int = logging.INFO) -> loggi
     Returns:
         Configured logger instance.
     """
+    from rotary_phone.config import get_config_value
+    
     logger = logging.getLogger(name)
+    
+    # Check if logging is enabled in config
+    if not get_config_value('enable_logging', True):
+        logger.setLevel(logging.CRITICAL)
+        return logger
+    
     logger.setLevel(level)
     
     if not logger.handlers:

@@ -32,7 +32,8 @@ def format_number(number: str, international: bool = False) -> str:
         XXX-XXXX format if 7 digits, otherwise returns the cleaned number
         without formatting characters.
     """
-    cleaned = number.replace("-", "").replace(" ", "").replace("(", "").replace(")", "")
+    # Use normalize_number for consistency
+    cleaned = normalize_number(number)
     if len(cleaned) == 10:
         formatted = f"({cleaned[:3]}) {cleaned[3:6]}-{cleaned[6:]}"
         if international:

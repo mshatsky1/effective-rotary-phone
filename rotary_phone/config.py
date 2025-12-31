@@ -28,7 +28,11 @@ def ensure_config_dir() -> Path:
 
 
 def get_config_file() -> Path:
-    """Get the path to the configuration file."""
+    """Get the path to the configuration file.
+    
+    Returns:
+        Path object pointing to the configuration file.
+    """
     config_dir = ensure_config_dir()
     return config_dir / "config.json"
 

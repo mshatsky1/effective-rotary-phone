@@ -16,10 +16,11 @@ def dial(number: str, delay: float = 0.1, quiet: bool = False) -> None:
     Args:
         number: Phone number to dial. Must be a valid number format.
         delay: Delay in seconds between each digit (default: 0.1).
+        quiet: If True, suppress output during dialing (default: False).
     
     Raises:
         InvalidNumberError: If the phone number is invalid.
-        ValueError: If delay is negative.
+        InvalidDelayError: If delay is negative.
     """
     if not validate_number(number):
         logger.error(f"Invalid phone number: {number}")
